@@ -32,7 +32,7 @@
 		})
 	}
 
-	function createLine (length = 700) {
+	function createLine (y = 0, length = 700) {
 		const count = Math.floor(length / (Joint.baseRadius * 2 * 1.05))
 
 		const joints = []
@@ -40,7 +40,7 @@
 		for (let i = 0; i < count; i++) {
 			const joint = Joint.make(
 				Joint.baseRadius * 2 * 1.05 * (i - (count - 1) / 2),
-				(Math.random() - .5) * .1,
+				y + (Math.random() - .5) * .1,
 			)
 
 			joints.push(joint)
@@ -49,6 +49,16 @@
 		connectLine(joints)
 
 		return joints
+	}
+
+	function createLinesParallel (length = 700) {
+		return [
+			...createLine(-2 * 3 * Joint.baseRadius * 2, length),
+			...createLine(-1 * 3 * Joint.baseRadius * 2, length),
+			...createLine(0, length),
+			...createLine(1 * 3 * Joint.baseRadius * 2, length),
+			...createLine(2 * 3 * Joint.baseRadius * 2, length),
+		]
 	}
 
 	function connectCircle (joints) {
@@ -89,6 +99,16 @@
 		connectCircle(joints)
 
 		return joints
+	}
+
+	function createCirclesNested (radius = 200) {
+		return [
+			...createCircle(radius),
+			...createCircle(radius - Joint.baseRadius * 2 * 3),
+			...createCircle(radius - Joint.baseRadius * 2 * 3 * 2),
+			...createCircle(radius - Joint.baseRadius * 2 * 3 * 3),
+			...createCircle(radius - Joint.baseRadius * 2 * 3 * 4),
+		]
 	}
 
 	function createGrid () {
@@ -154,7 +174,9 @@
     define('Formations', {
 		createSegment,
 		createLine,
-        createCircle,
+		createLinesParallel,
+		createCircle,
+		createCirclesNested,
         createGrid,
 	})
 })()
