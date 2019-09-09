@@ -36,21 +36,22 @@
 			inertia: {
 				min: 0,
 				max: 0.5,
+				initial: 0.3,
 			},
 			attraction: {
 				min: .01,
 				max: .99,
-				initial: 0.03,
+				initial: 0.5,
 			},
 			repulsion: {
 				min: .01,
 				max: .99,
-				initial: 0.1,
+				initial: 0.4,
 			},
 			multiplyRate: {
 				min: 0.0,
 				max: 1.0,
-				initial: 0.0,
+				initial: 0.5,
 			},
 			blipRate: {
 				min: 0.0,
