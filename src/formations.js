@@ -17,21 +17,63 @@
 		return [joint1, joint2]
 	}
 
-	function connectCircle (joints) {
+	function connectLine (joints) {
 		joints.forEach((joint, index) => {
-			if (index <= 0) {
-				joint.links.push(joints[joints.length - 1], joints[1])
-			} else if (index >= joints.length - 1) {
-				joint.links.push(joints[joints.length - 2], joints[0])
+			if (index === 0) {
+				joint.links.push(joints[1])
+			} else if (index === joints.length - 1) {
+				joint.links.push(joints[joints.length - 2])
 			} else {
-				joint.links.push(joints[index - 1], joints[index + 1])
+				joint.links.push(
+					joints[index - 1],
+					joints[index + 1],
+				)
 			}
 		})
 	}
 
-	function createCircle () {
-		const radius = 100
-		const count = Math.floor((Math.PI * 2. * radius) / (Joint.baseRadius * 1.))
+	function createLine (length = 700) {
+		const count = Math.floor(length / (Joint.baseRadius * 2 * 1.05))
+
+		const joints = []
+
+		for (let i = 0; i < count; i++) {
+			const joint = Joint.make(
+				Joint.baseRadius * 2 * 1.05 * (i - (count - 1) / 2),
+				(Math.random() - .5) * .1,
+			)
+
+			joints.push(joint)
+		}
+
+		connectLine(joints)
+
+		return joints
+	}
+
+	function connectCircle (joints) {
+		joints.forEach((joint, index) => {
+			if (index <= 0) {
+				joint.links.push(
+					joints[joints.length - 1],
+					joints[1],
+				)
+			} else if (index >= joints.length - 1) {
+				joint.links.push(
+					joints[joints.length - 2],
+					joints[0],
+				)
+			} else {
+				joint.links.push(
+					joints[index - 1],
+					joints[index + 1],
+				)
+			}
+		})
+	}
+
+	function createCircle (radius = 100) {		
+		const count = Math.floor((Math.PI * 2. * radius) / (Joint.baseRadius * 1.05))
 
 		const joints = []
 
@@ -110,7 +152,8 @@
 	}
 
     define('Formations', {
-        createSegment,
+		createSegment,
+		createLine,
         createCircle,
         createGrid,
 	})

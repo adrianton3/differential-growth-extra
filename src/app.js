@@ -74,6 +74,9 @@
 			segment () {
 				joints = Formations.createSegment()
 			},
+			line () {
+				joints = Formations.createLine()
+			},
 			grid () {
 				joints = Formations.createGrid()
 			},
