@@ -74,14 +74,17 @@
 			['circles-nested'] () {
 				joints = Formations.createCirclesNested()
 			},
+			['circles-around'] () {
+				joints = Formations.createCirclesAround()
+			},
 			segment () {
 				joints = Formations.createSegment()
+			},			
+			line () {
+				joints = Formations.createLine()
 			},
 			['lines-parallel'] () {
 				joints = Formations.createLinesParallel()
-			},
-			line () {
-				joints = Formations.createLine()
 			},
 			grid () {
 				joints = Formations.createGrid()

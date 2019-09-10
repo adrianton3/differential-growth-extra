@@ -82,15 +82,15 @@
 		})
 	}
 
-	function createCircle (radius = 100) {		
+	function createCircle (x = 0, y = 0, radius = 100) {		
 		const count = Math.floor((Math.PI * 2. * radius) / (Joint.baseRadius * 1.05))
 
 		const joints = []
 
 		for (let i = 0; i < count; i++) {
 			const joint = Joint.make(
-				Math.cos(i * (Math.PI * 2 / count)) * radius,
-				Math.sin(i * (Math.PI * 2 / count)) * radius,
+				x + Math.cos(i * (Math.PI * 2 / count)) * radius,
+				y + Math.sin(i * (Math.PI * 2 / count)) * radius,
 			)
 
 			joints.push(joint)
@@ -103,12 +103,31 @@
 
 	function createCirclesNested (radius = 200) {
 		return [
-			...createCircle(radius),
-			...createCircle(radius - Joint.baseRadius * 2 * 3),
-			...createCircle(radius - Joint.baseRadius * 2 * 3 * 2),
-			...createCircle(radius - Joint.baseRadius * 2 * 3 * 3),
-			...createCircle(radius - Joint.baseRadius * 2 * 3 * 4),
+			...createCircle(0, 0, radius),
+			...createCircle(0, 0, radius - Joint.baseRadius * 2 * 3),
+			...createCircle(0, 0, radius - Joint.baseRadius * 2 * 3 * 2),
+			...createCircle(0, 0, radius - Joint.baseRadius * 2 * 3 * 3),
+			...createCircle(0, 0, radius - Joint.baseRadius * 2 * 3 * 4),
 		]
+	}
+
+	function createCirclesAround (radius = 50) {
+		const count = 7
+		const radiusAround = 150
+
+		const joints = []
+
+		for (let i = 0; i < count; i++) {
+			joints.push(
+				...createCircle(
+					Math.cos(i * (Math.PI * 2 / count)) * radiusAround,
+					Math.sin(i * (Math.PI * 2 / count)) * radiusAround,
+					radius,
+				)
+			)
+		}		
+
+		return joints
 	}
 
 	function createGrid () {
@@ -177,6 +196,7 @@
 		createLinesParallel,
 		createCircle,
 		createCirclesNested,
+		createCirclesAround,
         createGrid,
 	})
 })()
