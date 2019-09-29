@@ -55,7 +55,7 @@
 		}
 
 		const joint1 = joint
-		const joint2 = joint.links[Math.floor(Math.random(joint.links.length))]
+		const joint2 = joint.links[Math.floor(Math.random() * joint.links.length)]
 
 		const position = ranMean(joint1.position, joint2.position)
 
