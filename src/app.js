@@ -79,7 +79,7 @@
 			},
 			segment () {
 				joints = Formations.createSegment()
-			},			
+			},
 			line () {
 				joints = Formations.createLine()
 			},
@@ -88,7 +88,10 @@
 			},
 			grid () {
 				joints = Formations.createGrid()
-			},
+            },
+            ['export-svg'] () {
+                Export.download('image.svg', Export.asSvg(joints))
+            },
 		})
 
 		const multiplySelector = Selectors.random
