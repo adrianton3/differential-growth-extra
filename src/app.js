@@ -22,13 +22,30 @@
 		return dummy
 	}
 
+	function parseUrl () {
+		const string = location.hash.slice(1)
+
+		return Object.fromEntries(
+			string.split(';').map((pairString) => {
+				const pair = pairString.split('=')
+				return [pair[0], Number(pair[1])]
+			})
+		)
+	}
+
 	function main () {
+		const options = Object.assign({
+			halfWidth: 768 / 2,
+			resolution: 48,
+			jointsMax: 8000,
+			jointsMin: 1000,
+		}, parseUrl())
+
 		const canvas = document.getElementById('can')
+		canvas.width = options.halfWidth * 2
+		canvas.height = options.halfWidth * 2
 
 		Draw.init(canvas)
-
-		const maxJoints = 8000
-		const minJoints = 1000
 
 		let joints = Formations.createCircle()
 
@@ -88,10 +105,10 @@
 			},
 			grid () {
 				joints = Formations.createGrid()
-            },
-            ['export-svg'] () {
-                Export.download('image.svg', Export.asSvg(joints))
-            },
+			},
+			['as-svg'] () {
+				Export.download('image.svg', Export.asSvg(joints))
+			},
 		})
 
 		const multiplySelector = Selectors.random
@@ -101,33 +118,35 @@
 
 		const steps = 1
 
+		const advance = Grow.makeGrow(options)
+
 		function run () {
 			for (let i = 0; i < steps; i++) {
-				Grow.advance(config, joints, null)
+				advance(config, joints, null)
 
 				if (
-					joints.length < maxJoints &&
+					joints.length < options.jointsMax &&
 					Math.random() < config.multiplyRate
 				) {
 					Operations.multiply(joints, multiplySelector)
 				}
 
 				if (
-					joints.length < maxJoints &&
+					joints.length < options.jointsMax &&
 					Math.random() < config.blipRate
 				) {
 					Operations.blip(joints, blipSelector)
 				}
 
 				if (
-					joints.length < maxJoints &&
+					joints.length < options.jointsMax &&
 					Math.random() < config.extendRate
 				) {
 					Operations.extend(joints, extendSelector)
 				}
 
 				if (
-					joints.length > minJoints &&
+					joints.length > options.jointsMin &&
 					Math.random() < config.removeRate
 				) {
 					Operations.remove(joints, removeSelector)
