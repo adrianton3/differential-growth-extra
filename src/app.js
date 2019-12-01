@@ -38,7 +38,8 @@
 			halfWidth: 768 / 2,
 			resolution: 48,
 			jointsMax: 8000,
-			jointsMin: 1000,
+            jointsMin: 1000,
+            steps: 1,
 		}, parseUrl())
 
 		const canvas = document.getElementById('can')
@@ -116,13 +117,11 @@
 		const extendSelector = Selectors.makeLeastConnectedSum(8, Selectors.makeMinAge(2))
 		const removeSelector = Selectors.makeMostConnectedSum(10, Selectors.makeMinAge(10))
 
-		const steps = 1
-
 		const advance = Grow.makeGrow(options)
 
 		function run () {
-			for (let i = 0; i < steps; i++) {
-				advance(config, joints, null)
+			for (let i = 0; i < options.steps; i++) {
+				advance(config, joints)
 
 				if (
 					joints.length < options.jointsMax &&
