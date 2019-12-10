@@ -2,14 +2,14 @@
     'use strict'
 
     importScripts(
-        'define.js',
-        'vec2.js',
-        'space.js',
-        'joint.js',
-        'grow.js',
-        'formations.js',
-        'selectors.js',
-        'operations.js',
+        'core/define.js',
+        'core/vec2.js',
+        'core/space.js',
+        'core/joint.js',
+        'core/grow.js',
+        'core/formations.js',
+        'core/selectors.js',
+        'core/operations.js',
         'transfer.js',
     )
 

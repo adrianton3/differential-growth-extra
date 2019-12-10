@@ -82,7 +82,7 @@
 		})
 	}
 
-	function createCircle (x = 0, y = 0, radius = 100) {		
+	function createCircle (x = 0, y = 0, radius = 100) {
 		const count = Math.floor((Math.PI * 2. * radius) / (Joint.baseRadius * 1.05))
 
 		const joints = []
@@ -125,7 +125,7 @@
 					radius,
 				)
 			)
-		}		
+		}
 
 		return joints
 	}
