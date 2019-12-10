@@ -5,30 +5,30 @@
 		return { x, y }
 	}
 
-	function clone ({ x, y }) {
-		return make(x, y)
+	function clone (v) {
+		return make(v.x, v.y)
 	}
 
-	function add (v, { x, y }) {
-		v.x += x
-		v.y += y
+	function add (v1, v2) {
+		v1.x += v2.x
+		v1.y += v2.y
 
-		return v
+		return v1
 	}
 
-	function addNew (v, { x, y }) {
-		return make(v.x + x, v.y + y)
+	function addNew (v1, v2) {
+		return make(v1.x + v2.x, v1.y + v2.y)
 	}
 
-	function sub (v, { x, y }) {
-		v.x -= x
-		v.y -= y
+	function sub (v1, v2) {
+		v1.x -= v2.x
+		v1.y -= v2.y
 
-		return v
+		return v1
 	}
 
-	function subNew (v, { x, y }) {
-		return make(v.x - x, v.y - y)
+	function subNew (v1, v2) {
+		return make(v1.x - v2.x, v1.y - v2.y)
 	}
 
 	function scale (v, factor) {
@@ -42,11 +42,11 @@
 		return make(v.x * factor, v.y * factor)
 	}
 
-	function mul (v, { x, y }) {
-		v.x *= x
-		v.y *= y
+	function mul (v1, v2) {
+		v1.x *= v2.x
+		v1.y *= v2.y
 
-		return v
+		return v1
 	}
 
 	function mean (v1, v2) {
@@ -56,12 +56,12 @@
 		)
 	}
 
-	function length ({ x, y }) {
-		return Math.sqrt(x ** 2 + y ** 2)
+	function length (v) {
+		return Math.sqrt(v.x ** 2 + v.y ** 2)
 	}
 
-	function lengthSquared ({ x, y }) {
-		return x ** 2 + y ** 2
+	function lengthSquared (v) {
+		return v.x ** 2 + v.y ** 2
 	}
 
 	function distance (v1, v2) {
@@ -70,13 +70,6 @@
 
 	function distanceSquared (v1, v2) {
 		return (v1.x - v2.x) ** 2 + (v1.y - v2.y) ** 2
-	}
-
-	const THRESHOLD = .1
-
-	function isNull({ x, y }) {
-		return -THRESHOLD < x && x < THRESHOLD &&
-			-THRESHOLD < y && y < THRESHOLD
 	}
 
 	define('Vec2', {
@@ -94,6 +87,5 @@
 		lengthSquared,
 		distance,
 		distanceSquared,
-		isNull,
 	})
 })()
