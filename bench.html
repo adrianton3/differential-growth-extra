@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Differential Growth (extra)</title>
+</head>
+<body>
+    <script>
+        {
+            // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+            let state = 1.
+            Math.random = () => {
+                const a = Math.sin(state++) * 10000.
+                return a - Math.floor(a)
+            }
+        }
+    </script>
+
+	<script src="src/core/define.js"></script>
+    <script src="src/core/vec2.js"></script>
+    <script src="src/core/space.js"></script>
+    <script src="src/core/joint.js"></script>
+    <script src="src/core/grow.js"></script>
+    <script src="src/core/formations.js"></script>
+    <script src="src/core/selectors.js"></script>
+    <script src="src/core/operations.js"></script>
+
+    <script src="src/bench.js"></script>
+</body>
+</html>
