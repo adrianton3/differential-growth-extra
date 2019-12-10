@@ -41,8 +41,10 @@
         const extendSelector = Selectors.makeLeastConnectedSum(8, Selectors.makeMinAge(2))
         const removeSelector = Selectors.makeMostConnectedSum(10, Selectors.makeMinAge(10))
 
+        const advance = Grow.makeGrow({ halfWidth: 768 / 2, resolution: 48 })
+
         function step (config, joints) {
-            Grow.advance(config, joints)
+            advance(config, joints)
 
             if (
                 joints.length < maxJoints &&
